@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.junit.platform.engine.ConfigurationParameters;
 import org.junit.platform.engine.Filter;
