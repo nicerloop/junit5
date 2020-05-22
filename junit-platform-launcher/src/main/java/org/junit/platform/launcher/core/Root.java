@@ -70,9 +70,8 @@ class Root {
 	}
 
 	Collection<TestDescriptor> getEngineDescriptors() {
-		return getSuiteDescriptor()
-				.map(o -> (Collection<TestDescriptor>) Collections.singleton(o))
-				.orElseGet(this.testEngineDescriptors::values);
+		return getSuiteDescriptor().map(o -> (Collection<TestDescriptor>) Collections.singleton(o)).orElseGet(
+			this.testEngineDescriptors::values);
 	}
 
 	TestDescriptor getTestDescriptorFor(TestEngine testEngine) {

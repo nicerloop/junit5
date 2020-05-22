@@ -797,5 +797,4 @@ class DefaultLauncherTests {
 		}
 	}
 
-
 }

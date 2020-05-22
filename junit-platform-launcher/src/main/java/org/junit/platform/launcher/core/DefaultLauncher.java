@@ -150,8 +150,8 @@ class DefaultLauncher implements Launcher {
 	}
 
 	private List<Root> discoverRoot(LauncherDiscoveryRequest discoveryRequest, String phase) {
-		return collectRequests(discoveryRequest).stream().map(request -> resolveRequest(request, phase))
-				.collect(Collectors.toList());
+		return collectRequests(discoveryRequest).stream().map(request -> resolveRequest(request, phase)).collect(
+			Collectors.toList());
 	}
 
 	private List<Root> collectRequests(LauncherDiscoveryRequest discoveryRequest) {
@@ -160,7 +160,7 @@ class DefaultLauncher implements Launcher {
 		requests.addAll(new SuiteDiscoverer().resolve(discoveryRequest));
 		return requests;
 	}
-	
+
 	private Root resolveRequest(Root root, String phase) {
 		LauncherDiscoveryRequest discoveryRequest = root.getDiscoveryRequest();
 		for (TestEngine testEngine : this.testEngines) {
@@ -192,8 +192,8 @@ class DefaultLauncher implements Launcher {
 		LauncherDiscoveryRequest discoveryRequest = root.getDiscoveryRequest();
 		LauncherDiscoveryListener discoveryListener = discoveryRequest.getDiscoveryListener();
 		UniqueId uniqueEngineId = root.getSuiteDescriptor().map(TestDescriptor::getUniqueId).map(
-				id -> id.append(UniqueId.ENGINE_SEGMENT_TYPE, testEngine.getId())).orElseGet(
-						() -> UniqueId.forEngine(testEngine.getId()));
+			id -> id.append(UniqueId.ENGINE_SEGMENT_TYPE, testEngine.getId())).orElseGet(
+				() -> UniqueId.forEngine(testEngine.getId()));
 		try {
 			discoveryListener.engineDiscoveryStarted(uniqueEngineId);
 			TestDescriptor engineRoot = testEngine.discover(discoveryRequest, uniqueEngineId);
@@ -219,7 +219,7 @@ class DefaultLauncher implements Launcher {
 		}
 		testExecutionListener.testPlanExecutionFinished(internalTestPlan);
 	}
-		
+
 	private void execute(InternalTestPlan internalTestPlan, Root root, TestExecutionListenerRegistry listenerRegistry) {
 		ConfigurationParameters configurationParameters = root.getConfigurationParameters();
 		withInterceptedStreams(configurationParameters, listenerRegistry, testExecutionListener -> {
@@ -238,8 +238,8 @@ class DefaultLauncher implements Launcher {
 				}
 			}
 			root.getSuiteDescriptor().map(TestIdentifier::from).ifPresent(
-					suiteIdentifier -> testExecutionListener.executionFinished(
-							suiteIdentifier, TestExecutionResult.successful()));
+				suiteIdentifier -> testExecutionListener.executionFinished(suiteIdentifier,
+					TestExecutionResult.successful()));
 		});
 	}
 
